@@ -1,0 +1,75 @@
+# Copy to /etc/ipload-balancer.conf and edit for your server.
+#
+# This tool assumes the IPs belong to you and are routed to this Linux server.
+# It is meant for defensive balancing/rotation, not for bypassing third-party
+# blocks or abuse controls.
+
+# Public interface that owns the routed IPs.
+PUBLIC_IFACE="eth0"
+
+# Optional LAN/client CIDR if this server is a NAT gateway.
+# Leave empty to SNAT any traffic leaving PUBLIC_IFACE.
+LAN_CIDR="10.10.0.0/24"
+
+# Public source IPs available on the server. The script adds them as /32 if
+# they are missing from PUBLIC_IFACE.
+PUBLIC_IPS=(
+  "203.0.113.10"
+  "203.0.113.11"
+  "203.0.113.12"
+)
+
+# balance: distribute outbound/NAT traffic across all PUBLIC_IPS.
+# rotate: use one active IP and rotate periodically or on attack detection.
+MODE="balance"
+
+# random: spreads flows randomly.
+# persistent: same src/dst pair tends to keep the same public IP.
+BALANCE_METHOD="persistent"
+
+# Used when MODE=rotate, or after attack detection switches balance to rotate.
+ROTATE_SECONDS="300"
+
+# Monitor loop.
+CHECK_INTERVAL="5"
+REACTION_COOLDOWN="60"
+
+# Attack thresholds. Tune for your normal traffic.
+ATTACK_RX_PPS="80000"
+ATTACK_RX_BPS="100000000"
+ATTACK_SYN_RECV="1500"
+ATTACK_CONNTRACK_USAGE="85"
+
+# Basic nftables input guard for common exposed ports.
+ENABLE_INPUT_GUARD="yes"
+PROTECTED_PORTS="22,80,443"
+
+# Drop obviously unroutable/private source ranges arriving from the public side.
+ENABLE_BOGON_DROP="yes"
+
+# Log a small sample of packets to protected ports. Useful while tuning; keep
+# disabled in very noisy production environments unless you need evidence.
+ENABLE_PACKET_LOG="no"
+PACKET_LOG_RATE="30/minute"
+
+# Country policy for inbound traffic to PROTECTED_PORTS.
+# off: no country filter.
+# allow: only GEO_COUNTRIES can reach protected ports.
+# block: GEO_COUNTRIES cannot reach protected ports.
+#
+# Country lists are IPv4 CIDR files downloaded from ipdeny.com by update-geo.
+# Use ISO country codes: AR, US, BR, CL, ES, etc.
+GEO_POLICY="off"
+GEO_COUNTRIES=(
+  "AR"
+  "US"
+)
+GEO_REFRESH_HOURS="24"
+GEO_SOURCE_URL="https://www.ipdeny.com/ipblocks/data/countries"
+
+# When rotating because of an attack, temporarily drop traffic to the previously
+# active attacked destination IP. Set 0 to disable.
+DROP_ATTACKED_IP_SECONDS="90"
+
+# Enable ip_forward, syncookies, and rp_filter changes useful for multi-IP NAT.
+ENABLE_SYSCTL_HARDENING="yes"
