@@ -1,6 +1,3 @@
-<p align="center">
-  <img src="assets/banner.svg" alt="ipload-balancing">
-</p>
 
 <h1 align="center">ipload-balancing</h1>
 
