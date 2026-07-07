@@ -1,4 +1,18 @@
-# ipload-balancing
+<p align="center">
+  <img src="assets/banner.svg" alt="ipload-balancing">
+</p>
+
+<h1 align="center">ipload-balancing</h1>
+
+<p align="center">
+  <strong>Balanceo, rotacion y defensa para servidores Linux con multiples IPs publicas.</strong>
+</p>
+
+<p align="center">
+  <img alt="Linux" src="https://img.shields.io/badge/Linux-nftables-28d8a1?style=for-the-badge">
+  <img alt="Shell" src="https://img.shields.io/badge/Shell-Bash-4ea3ff?style=for-the-badge">
+  <img alt="systemd" src="https://img.shields.io/badge/systemd-service-f0b84f?style=for-the-badge">
+</p>
 
 Pensado para servidores gateway, proxies propios, nodos con varias IPs publicas
 o servicios donde conviene tener rotacion y reglas de contencion rapidas.

@@ -1,0 +1,54 @@
+<svg width="1200" height="320" viewBox="0 0 1200 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .bg { fill: #071014; }
+    .grid { stroke: #17343d; stroke-width: 1; opacity: .55; }
+    .line { stroke: #28d8a1; stroke-width: 3; stroke-linecap: round; stroke-dasharray: 520; stroke-dashoffset: 520; animation: trace 2.4s ease forwards; }
+    .line.two { stroke: #4ea3ff; animation-delay: .35s; }
+    .line.three { stroke: #f0b84f; animation-delay: .65s; }
+    .node { fill: #0f1f26; stroke: #28d8a1; stroke-width: 3; transform-origin: center; animation: pulse 2.2s ease-in-out infinite; }
+    .node.blue { stroke: #4ea3ff; animation-delay: .3s; }
+    .node.gold { stroke: #f0b84f; animation-delay: .6s; }
+    .title { fill: #f3fbf8; font: 800 58px Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif; letter-spacing: 0; opacity: 0; transform: translateY(18px); animation: rise .8s ease forwards .2s; }
+    .subtitle { fill: #9fb8bd; font: 500 22px Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif; opacity: 0; transform: translateY(14px); animation: rise .8s ease forwards .65s; }
+    .chip { fill: #10252d; stroke: #244a54; stroke-width: 1; opacity: 0; transform: translateY(12px); animation: rise .7s ease forwards; }
+    .chipText { fill: #d8f7ee; font: 700 15px Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif; opacity: 0; transform: translateY(12px); animation: rise .7s ease forwards; }
+    .scan { fill: url(#scanGradient); opacity: .18; animation: scan 3.8s linear infinite; }
+    @keyframes rise { to { opacity: 1; transform: translateY(0); } }
+    @keyframes trace { to { stroke-dashoffset: 0; } }
+    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+    @keyframes scan { from { transform: translateX(-460px); } to { transform: translateX(1260px); } }
+  </style>
+  <defs>
+    <linearGradient id="scanGradient" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#28d8a1" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#28d8a1"/>
+      <stop offset="1" stop-color="#28d8a1" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <rect class="bg" width="1200" height="320" rx="26"/>
+  <path class="grid" d="M0 64H1200M0 128H1200M0 192H1200M0 256H1200M100 0V320M200 0V320M300 0V320M400 0V320M500 0V320M600 0V320M700 0V320M800 0V320M900 0V320M1000 0V320M1100 0V320"/>
+  <rect class="scan" x="0" y="0" width="360" height="320"/>
+
+  <path class="line" d="M84 220C180 132 261 261 358 172C451 86 528 115 617 178"/>
+  <path class="line two" d="M84 128C179 201 262 62 356 124C441 179 529 230 617 96"/>
+  <path class="line three" d="M84 270C160 250 232 224 302 242C413 270 505 288 617 232"/>
+
+  <circle class="node" cx="84" cy="220" r="10"/>
+  <circle class="node blue" cx="356" cy="124" r="10"/>
+  <circle class="node gold" cx="617" cy="232" r="10"/>
+  <circle class="node" cx="617" cy="178" r="8"/>
+  <circle class="node blue" cx="617" cy="96" r="8"/>
+
+  <text class="title" x="680" y="126">ipload-balancing</text>
+  <text class="subtitle" x="684" y="166">balanceo, rotacion y defensa para multiples IPs</text>
+
+  <rect class="chip" x="684" y="205" width="112" height="34" rx="17" style="animation-delay: .95s"/>
+  <text class="chipText" x="714" y="227" style="animation-delay: 1.02s">nftables</text>
+  <rect class="chip" x="812" y="205" width="96" height="34" rx="17" style="animation-delay: 1.12s"/>
+  <text class="chipText" x="839" y="227" style="animation-delay: 1.19s">GeoIP</text>
+  <rect class="chip" x="924" y="205" width="112" height="34" rx="17" style="animation-delay: 1.29s"/>
+  <text class="chipText" x="954" y="227" style="animation-delay: 1.36s">systemd</text>
+  <rect class="chip" x="1052" y="205" width="86" height="34" rx="17" style="animation-delay: 1.46s"/>
+  <text class="chipText" x="1074" y="227" style="animation-delay: 1.53s">SNAT</text>
+</svg>
